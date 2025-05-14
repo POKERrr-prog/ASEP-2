@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signify | ASL Search Interface</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Login Modal -->
+<div class="auth-modal" id="authModal">
+  <div class="auth-container">
+    <div class="auth-header">
+
+      <h2>Welcome to ASL-Google Search</h2>
+    </div>
+    <form id="authForm">
+      <div class="form-group">
+        <input type="text" id="username" placeholder="Username" required>
+      </div>
+      <div class="form-group">
+        <input type="password" id="password" placeholder="Password" required>
+      </div>
+      <button type="submit" class="btn-primary"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+      <p class="auth-switch">Don't have an account? <a href="#" id="switchToSignup">Sign Up</a></p>
+    </form>
+  </div>
+</div>
+
+  <!-- Main Application (hidden until login) -->
+  <div class="app-container" id="appContainer" style="display:none;">
+    <!-- Navigation -->
+    <nav class="main-nav">
+      <div class="nav-brand">
+        
+        <span>Signify</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#" class="nav-link active" data-page="home"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#" class="nav-link" data-page="learn"><i class="fas fa-hands"></i> Learn ASL</a></li>
+        <li><a href="#" class="nav-link" data-page="search"><i class="fas fa-search"></i> Search</a></li>
+      </ul>
+      <div class="nav-user">
+        <span class="username">Welcome, User</span>
+        <button class="btn-logout"><i class="fas fa-sign-out-alt"></i></button>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <main class="page-content">
+      <!-- Home Page -->
+      <div class="page active" id="homePage">
+        <div class="hero-section">
+          <h1>Empowering Communication Through ASL</h1>
+          <p class="hero-text">Signify bridges the gap between American Sign Language and digital search, creating accessible technology for the Deaf and Hard of Hearing community.</p>
+        </div>
+
+        <div class="info-section">
+          <div class="info-card">
+            <div class="info-icon"><i class="fas fa-universal-access"></i></div>
+            <h3>Accessible Technology</h3>
+            <p>Our platform converts ASL gestures directly into search queries, removing communication barriers in digital spaces.</p>
+          </div>
+          <div class="info-card">
+            <div class="info-icon"><i class="fas fa-graduation-cap"></i></div>
+            <h3>Learn As You Go</h3>
+            <p>Built-in ASL tutorials help users improve their signing while using the platform.</p>
+          </div>
+          <div class="info-card">
+            <div class="info-icon"><i class="fas fa-bolt"></i></div>
+            <h3>Instant Results</h3>
+            <p>Get Google search results immediately after signing your query.</p>
+          </div>
+        </div>
+
+        <div class="steps-section">
+          <h2 class="section-title">How Signify Works</h2>
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3>Sign In</h3>
+              <p>Create your free account to get started.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3>Enable Your Webcam</h3>
+              <p>Allow access to your camera when prompted.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3>Sign Your Query</h3>
+              <p>Use ASL to spell out what you want to search.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h3>Get Results</h3>
+              <p>View your search results instantly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Learn ASL Page -->
+      <div class="page" id="learnPage">
+        <h1 class="page-title">Learn American Sign Language</h1>
+        <div class="asl-alphabet-grid">
+          <!-- Will be populated by JavaScript -->
+        </div>
+        <div class="video-tutorial">
+          <h2>ASL Alphabet Tutorial</h2>
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/tkMg8g8vVUo" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search Page -->
+      <div class="page" id="searchPage">
+        <h1 class="page-title">ASL Search Interface</h1>
+        <div class="search-interface">
+          <div class="webcam-container">
+            <video id="webcam" autoplay playsinline></video>
+            <div class="webcam-controls">
+              <button class="btn-secondary" id="startWebcam"><i class="fas fa-video"></i> Enable Camera</button>
+              <button class="btn-primary" id="captureBtn"><i class="fas fa-camera"></i> Capture</button>
+            </div>
+          </div>
+          <div class="search-results">
+            <div class="detected-letters">
+              <h3>Your Search Query</h3>
+              <div class="letter-display" id="letterDisplay"></div>
+              <div class="search-actions">
+                <button class="btn-secondary" id="resetBtn"><i class="fas fa-undo"></i> Reset</button>
+                <button class="btn-primary" id="searchBtn"><i class="fas fa-search"></i> Search</button>
+              </div>
+            </div>
+            <div class="capture-history" id="captureHistory">
+              <h3>Capture History</h3>
+              <div class="captures-grid"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
